@@ -1,29 +1,33 @@
-name: Generate snake
+name: Snake
 
 on:
   schedule:
-    - cron: "0 3 * * *"   # раз в день
-  workflow_dispatch:      # ручной запуск
+    - cron: "0 6 * * *"   # раз в день
+  workflow_dispatch:      # возможность запустить руками
+  push:
+    branches: ["main"]    # на всякий
 
 jobs:
-  build:
+  generate:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Generate snake SVGs
+      - name: Generate snake SVG
         uses: Platane/snk@v3
         with:
           github_user_name: HDBOOMONE12
           outputs: |
-            .github/assets/snake.svg
-            .github/assets/snake-dark.svg?palette=github-dark
+            dist/github-snake.svg?palette=github-dark
 
-      - name: Commit updated files
-        uses: EndBug/add-and-commit@v9
+      - name: Move file to assets
+        run: |
+          mkdir -p .github/assets/assets
+          cp dist/github-snake.svg .github/assets/assets/github-snake.svg
+
+      - name: Commit updated snake
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          add: ".github/assets/*.svg"
-          message: "chore: update snake"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          commit_message: "chore: update snake"
+          file_pattern: ".github/assets/assets/github-snake.svg"
