@@ -3,11 +3,10 @@ name: Snake
 on:
   schedule:
     - cron: "0 6 * * *"      # раз в день (UTC)
-  workflow_dispatch: {}       # <-- кнопка Run workflow
+  workflow_dispatch:         # кнопка "Run workflow"
   push:
-    branches: ["main"]        # на всякий
+    branches: ["main"]       # на всякий
 
-# чтобы action смог закоммитить svg обратно в репозиторий
 permissions:
   contents: write
 
@@ -17,27 +16,23 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: Generate snake SVG
+      - name: Generate snake SVGs (light + dark)
         uses: Platane/snk@v3
         with:
           github_user_name: HDBOOMONE12
           outputs: |
-            dist/github-snake.svg
+            dist/github-snake-light.svg?palette=github
             dist/github-snake-dark.svg?palette=github-dark
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Move file(s) to assets
+      - name: Move files to assets
         run: |
           mkdir -p .github/assets/assets
-          cp dist/github-snake.svg .github/assets/assets/github-snake.svg
-          cp dist/github-snake-dark.svg .github/assets/assets/github-snake-dark.svg || true
+          cp dist/github-snake-light.svg .github/assets/assets/github-snake.svg
+          cp dist/github-snake-dark.svg  .github/assets/assets/github-snake-dark.svg
 
       - name: Commit updated snake
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "chore: update snake"
+          commit_message: "chore: update snake (light + dark)"
           file_pattern: ".github/assets/assets/github-snake*.svg"
