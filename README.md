@@ -37,8 +37,11 @@
 ###
 
 <p align="center">
-  <!-- ВАЖНО: путь совпадает со структурой из скриншота -->
-  <img width="600" src="./.github/assets/assets/github-snake.svg" alt="snake"/>
+  <picture>
+    <source media="(prefers-color-scheme: dark)"  srcset="./.github/assets/assets/github-snake-dark.svg" />
+    <source media="(prefers-color-scheme: light)" srcset="./.github/assets/assets/github-snake.svg" />
+    <img width="600" alt="snake" src="./.github/assets/assets/github-snake.svg" />
+  </picture>
 </p>
 
 ###
@@ -46,24 +49,24 @@
 <h3 align="left">🛠 Технологии</h3>
 
 #### ☕ Java
-- **Java 17+**
-- **Spring Boot**
-- **ORM (Hibernate JPA)**
-- **Maven**
-- **JUnit 5 / Mockito / Testcontainers**
-- **Liquibase**
+- **Java 17+**  
+- **Spring Boot**  
+- **ORM (Hibernate JPA)**  
+- **Maven**  
+- **JUnit 5 / Mockito / Testcontainers**  
+- **Liquibase**  
 
 #### 🐹 Go
-- **Go 1.24+** — `net/http`, `context`, `json`
-- **REST API (ServeMux)**
-- **Тестирование** — `go test`, `gomock`
-- **Миграции SQL`
+- **Go 1.24+** — `net/http`, `context`, `json`  
+- **REST API (ServeMux)**  
+- **Тестирование** — `go test`, `gomock`  
+- **Миграции SQL**  
 
 #### 🔗 Общие
-- **PostgreSQL**
-- **Docker / Docker Compose**
-- **CI/CD (GitHub Actions)**
-- **gRPC + Kafka**
+- **PostgreSQL**  
+- **Docker / Docker Compose**  
+- **CI/CD (GitHub Actions)**  
+- **gRPC + Kafka**  
 
 ###
 
